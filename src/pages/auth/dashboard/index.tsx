@@ -1,4 +1,3 @@
-import React from "react";
 import { Container, useBreakpointValue, SimpleGrid } from "@chakra-ui/react";
 import PlayerItem from "../../../components/players/player";
 import { usePlayersInfiniteQuery } from "../../../hooks/query/usePlayersQuery";

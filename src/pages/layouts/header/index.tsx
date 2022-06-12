@@ -32,7 +32,6 @@ const NavLink = ({ children }: { children: ReactNode }) => (
 );
 
 export const AuthorizedHeader: React.FC = () => {
-  const linkColor = useColorModeValue("gray.600", "gray.200");
   const linkHoverColor = useColorModeValue("gray.800", "white");
   const popoverContentBgColor = useColorModeValue("white", "gray.800");
 
