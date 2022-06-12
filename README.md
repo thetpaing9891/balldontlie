@@ -1,47 +1,46 @@
-# Getting Started with Create React App
+# Codigo - Code Test - 2
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This application was generated using React apps, you can find documentation and help at
+[Create React App](https://create-react-app.dev/docs/making-a-progressive-web-app).
 
-## Available Scripts
+## Development
 
-In the project directory, you can run:
+Before you can build this project, you must install and configure the following dependencies on your machine:
 
-### `npm start`
+1. [Node.js][]: We use Node to run a development web server and build the project.
+   Depending on your system, you can install Node either from source or as a pre-packaged bundle.
 
-Runs the app in the development mode.\
+## Getting started
+
+```
+git clone https://github.com/thetpaing9891/balldontlie.git
+cd balldontlie
+npm install
+```
+
+## Environment Setup
+
+Then create a .env file at the root directory of your application and add the variables to it.
+
+```
+REACT_APP_API_BASE_URL="https://www.balldontlie.io/api/v1"
+```
+
+Inside the newly created project, you can run some built-in commands:
+
+`npm start`
+
+Runs the app in development mode.
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Building for production
 
-### `npm test`
+To build the code test project application for production, run:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+npm run build
+```
 
-### `npm run build`
+## Demo Link
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-# balldontlie
+[https://codigo-balldontlie.herokuapp.com/](https://codigo-balldontlie.herokuapp.com/)

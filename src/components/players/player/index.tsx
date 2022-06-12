@@ -1,0 +1,118 @@
+import {
+  Heading,
+  Avatar,
+  Box,
+  Center,
+  Text,
+  Stack,
+  Button,
+  useColorModeValue,
+} from "@chakra-ui/react";
+import { Player } from "../../../types";
+
+interface PlayerCardProps {
+  player: Player;
+}
+
+const PlayerItem = (props: PlayerCardProps) => {
+  return (
+    <Center py={6}>
+      <Box
+        maxW={"320px"}
+        w={"full"}
+        bg={useColorModeValue("white", "gray.900")}
+        boxShadow={"2xl"}
+        rounded={"lg"}
+        p={6}
+        textAlign={"center"}
+      >
+        <Avatar
+          size={"xl"}
+          src={"../../../profile.svg"}
+          mb={4}
+          pos={"relative"}
+          _after={{
+            content: '""',
+            w: 4,
+            h: 4,
+            bg: "green.300",
+            border: "2px solid white",
+            rounded: "full",
+            pos: "absolute",
+            bottom: 0,
+            right: 3,
+          }}
+        />
+        <Heading fontSize={"2xl"} fontFamily={"body"}>
+          {props.player.first_name} {props.player.last_name}
+        </Heading>
+
+        <Stack direction={"row"} justify={"center"} spacing={6}>
+          <Stack spacing={0} align={"center"}>
+            <Text fontSize={"sm"} color={"gray.500"}>
+              Position
+            </Text>
+            <Text fontWeight={600}>{props.player.position}</Text>
+          </Stack>
+          <Stack spacing={0} align={"center"}>
+            <Text fontSize={"sm"} color={"gray.500"}>
+              Height
+            </Text>
+            <Text fontWeight={600}>{props.player.height_inches}</Text>
+          </Stack>
+        </Stack>
+
+        <Stack direction={"row"} justify={"center"} spacing={6}>
+          <Stack spacing={0} align={"center"}>
+            <Text fontSize={"sm"} color={"gray.500"}>
+              Team Name
+            </Text>
+            <Text fontWeight={600}>{props.player.team.full_name}</Text>
+          </Stack>
+        </Stack>
+
+        <Stack direction={"row"} justify={"center"} spacing={6}>
+          <Stack spacing={0} align={"center"}>
+            <Text fontSize={"sm"} color={"gray.500"}>
+              City
+            </Text>
+            <Text fontWeight={600}>{props.player.team.city}</Text>
+          </Stack>
+        </Stack>
+
+        <Stack mt={8} direction={"row"} spacing={4}>
+          <Button
+            flex={1}
+            fontSize={"sm"}
+            rounded={"full"}
+            _focus={{
+              bg: "gray.200",
+            }}
+          >
+            Select
+          </Button>
+          <Button
+            flex={1}
+            fontSize={"sm"}
+            rounded={"full"}
+            bg={"red.400"}
+            color={"white"}
+            boxShadow={
+              "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+            }
+            _hover={{
+              bg: "red.500",
+            }}
+            _focus={{
+              bg: "red.500",
+            }}
+          >
+            Remove
+          </Button>
+        </Stack>
+      </Box>
+    </Center>
+  );
+};
+
+export default PlayerItem;
