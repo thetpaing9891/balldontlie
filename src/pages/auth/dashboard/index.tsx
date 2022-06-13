@@ -1,10 +1,13 @@
 import { Container, useBreakpointValue, SimpleGrid } from "@chakra-ui/react";
 import PlayerItem from "../../../components/players/player";
 import { usePlayersInfiniteQuery } from "../../../hooks/query/usePlayersQuery";
-import { Player, requestParams } from "../../../types";
+import { Player, PlayerType, requestParams, TeamType } from "../../../types";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { useDispatch, useSelector } from "react-redux";
+import { createPlayer, deletePlayer } from "../../../redux/action/index";
+import { v4 as uuidv4 } from "uuid";
 
 const params: requestParams = {
   page: 1,
@@ -12,9 +15,29 @@ const params: requestParams = {
 };
 
 const Dashboard = () => {
+  const dispatch = useDispatch();
   const columns = useBreakpointValue({ base: 1, md: 3 });
   let pageLength = 12;
   const data = usePlayersInfiniteQuery(params);
+
+  const teams: TeamType[] = useSelector((state: any) => state.handlerTeam);
+  const players: PlayerType[] = useSelector(
+    (state: any) => state.handlerPlayer
+  );
+
+  const handlePickUp = (player: Player, teamId: string) => {
+    const team: any = teams.find((team: TeamType) => team.id === teamId);
+    const data: PlayerType = {
+      id: uuidv4(),
+      player: player,
+      team: team,
+    };
+    dispatch(createPlayer(data));
+  };
+
+  const removePickUp = (id: string) => {
+    dispatch(deletePlayer(id));
+  };
 
   return (
     <Container
@@ -36,7 +59,14 @@ const Dashboard = () => {
           <SimpleGrid columns={columns} spacing={8}>
             {data?.data.pages.map((page) =>
               page.results.map((player: Player) => (
-                <PlayerItem key={player.id} player={player} />
+                <PlayerItem
+                  key={player.id}
+                  player={player}
+                  teams={teams}
+                  players={players}
+                  handlePickUp={handlePickUp}
+                  removePickUp={removePickUp}
+                />
               ))
             )}
           </SimpleGrid>

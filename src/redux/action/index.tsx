@@ -1,4 +1,4 @@
-import { TeamType } from "../../types";
+import { TeamType, PlayerType } from "../../types";
 
 export const createTeam = (team: TeamType) => {
   return {
@@ -27,5 +27,30 @@ export const clearCart = (team: TeamType[]) => {
   return {
     type: "CLEAR_TEAM",
     payload: team,
+  };
+};
+
+// Create Player
+
+export const createPlayer = (player: PlayerType) => {
+  return {
+    type: "CREATE_PLAYER",
+    payload: player,
+  };
+};
+
+// Delete Item from Store
+export const deletePlayer = (id: string) => {
+  return {
+    type: "DELETE_PLAYER",
+    payload: id,
+  };
+};
+
+// Delete Item from Store
+export const deletePlayerByTeamID = (id: string) => {
+  return {
+    type: "DELETE_PLAYER_BYTEAM",
+    payload: id,
   };
 };

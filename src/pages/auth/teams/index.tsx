@@ -16,7 +16,7 @@ import {
 } from "@chakra-ui/react";
 import { useSelector, useDispatch } from "react-redux";
 import { MdDelete, MdMode } from "react-icons/md";
-import { deleteTeam } from "../../../redux/action";
+import { deleteTeam, deletePlayerByTeamID } from "../../../redux/action";
 import { TeamType } from "../../../types";
 import AlertDialogComponent from "../../../components/alertdialog";
 import EditPopup from "../../../components/editpopup/index";
@@ -60,6 +60,7 @@ const TeamsIndex = () => {
     onClose();
   };
   const removeTeam = (item: TeamType) => {
+    dispatch(deletePlayerByTeamID(item.id));
     dispatch(deleteTeam(item));
   };
 

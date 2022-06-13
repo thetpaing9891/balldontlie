@@ -39,3 +39,9 @@ export type TeamType = {
     region : string
     country : string
 }
+
+export type PlayerType = {
+    id : string
+    player : Player,
+    team : TeamType,
+}

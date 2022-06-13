@@ -5,16 +5,27 @@ import {
   Center,
   Text,
   Stack,
+  HStack,
   Button,
   useColorModeValue,
+  useDisclosure,
 } from "@chakra-ui/react";
-import { Player } from "../../../types";
+import { Player, TeamType, PlayerType } from "../../../types";
+import TeamPopup from "../../teampopup/index";
 
 interface PlayerCardProps {
   player: Player;
+  teams: TeamType[];
+  players: PlayerType[];
+  handlePickUp: (player: Player, teamId: string) => void;
+  removePickUp: (id: string) => void;
 }
 
 const PlayerItem = (props: PlayerCardProps) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const isSelected = props.players.find(
+    (item) => item.player.id === props.player.id
+  );
   return (
     <Center py={6}>
       <Box
@@ -62,55 +73,72 @@ const PlayerItem = (props: PlayerCardProps) => {
           </Stack>
         </Stack>
 
-        <Stack direction={"row"} justify={"center"} spacing={6}>
-          <Stack spacing={0} align={"center"}>
-            <Text fontSize={"sm"} color={"gray.500"}>
-              Team Name
-            </Text>
-            <Text fontWeight={600}>{props.player.team.full_name}</Text>
-          </Stack>
-        </Stack>
+        {isSelected && (
+          <>
+            <Stack direction={"row"} justify={"center"} spacing={6}>
+              <Stack spacing={0} align={"center"}>
+                <Text fontSize={"sm"} color={"gray.500"}>
+                  Team Name
+                </Text>
+                <Text fontWeight={600}>{isSelected.team.name}</Text>
+              </Stack>
+            </Stack>
 
-        <Stack direction={"row"} justify={"center"} spacing={6}>
-          <Stack spacing={0} align={"center"}>
-            <Text fontSize={"sm"} color={"gray.500"}>
-              City
-            </Text>
-            <Text fontWeight={600}>{props.player.team.city}</Text>
-          </Stack>
-        </Stack>
+            <Stack direction={"row"} justify={"center"} spacing={6}>
+              <Stack spacing={0} align={"center"}>
+                <Text fontSize={"sm"} color={"gray.500"}>
+                  Country
+                </Text>
+                <Text fontWeight={600}>{isSelected.team.country}</Text>
+              </Stack>
+            </Stack>
+          </>
+        )}
 
-        <Stack mt={8} direction={"row"} spacing={4}>
-          <Button
-            flex={1}
-            fontSize={"sm"}
-            rounded={"full"}
-            _focus={{
-              bg: "gray.200",
-            }}
-          >
-            Select
-          </Button>
-          <Button
-            flex={1}
-            fontSize={"sm"}
-            rounded={"full"}
-            bg={"red.400"}
-            color={"white"}
-            boxShadow={
-              "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-            }
-            _hover={{
-              bg: "red.500",
-            }}
-            _focus={{
-              bg: "red.500",
-            }}
-          >
-            Remove
-          </Button>
-        </Stack>
+        <HStack mt={8} spacing={4}>
+          {!isSelected ? (
+            <Button
+              flex={1}
+              fontSize={"sm"}
+              rounded={"full"}
+              _focus={{
+                bg: "gray.200",
+              }}
+              onClick={onOpen}
+            >
+              Select
+            </Button>
+          ) : (
+            <Button
+              flex={1}
+              fontSize={"sm"}
+              rounded={"full"}
+              bg={"red.400"}
+              color={"white"}
+              boxShadow={
+                "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+              }
+              _hover={{
+                bg: "red.500",
+              }}
+              _focus={{
+                bg: "red.500",
+              }}
+              onClick={() => props.removePickUp(isSelected.id)}
+            >
+              Remove
+            </Button>
+          )}
+        </HStack>
       </Box>
+
+      <TeamPopup
+        isOpen={isOpen}
+        player={props.player}
+        onClose={onClose}
+        teams={props.teams}
+        handlePickUp={props.handlePickUp}
+      />
     </Center>
   );
 };
