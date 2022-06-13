@@ -3,6 +3,7 @@ import Login from "../pages/login/index";
 import Dashboard from "../pages/auth/dashboard/index";
 import LoginIndex from "./login/index";
 import AdminIndex from "./auth/index";
+import TeamsIndex from "../pages/auth/teams/index";
 
 export function AppRoutes() {
   return (
@@ -13,6 +14,7 @@ export function AppRoutes() {
       </Route>
       <Route path="/admin" element={<AdminIndex />}>
         <Route path="" element={<Dashboard />} />
+        <Route path="teams" element={<TeamsIndex />} />
         <Route path="*" element={<Navigate to="" replace />} />
       </Route>
     </Routes>

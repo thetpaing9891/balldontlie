@@ -31,3 +31,11 @@ export type AuthResponse = {
         name: string
     }
 }
+
+export type TeamType = {
+    id : string
+    name : string
+    player_count : number
+    region : string
+    country : string
+}

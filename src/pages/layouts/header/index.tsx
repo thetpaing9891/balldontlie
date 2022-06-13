@@ -31,7 +31,7 @@ const NavLink = ({ children }: { children: ReactNode }) => (
   </Link>
 );
 
-export const AuthorizedHeader: React.FC = () => {
+export const AuthorizedHeader = (props: any) => {
   const linkHoverColor = useColorModeValue("gray.800", "white");
   const popoverContentBgColor = useColorModeValue("white", "gray.800");
 
@@ -51,8 +51,8 @@ export const AuthorizedHeader: React.FC = () => {
             <Popover trigger={"hover"} placement={"bottom-start"}>
               <PopoverTrigger>
                 <Link
+                  href="/admin/teams"
                   p={2}
-                  href={"#"}
                   fontWeight={500}
                   _hover={{
                     textDecoration: "none",
@@ -72,7 +72,7 @@ export const AuthorizedHeader: React.FC = () => {
                 minW={"sm"}
               >
                 <Stack>
-                  <DesktopSubNav name="Create" />
+                  <DesktopSubNav name="Create" onOpen={props.onOpen} />
                 </Stack>
               </PopoverContent>
             </Popover>
@@ -84,7 +84,7 @@ export const AuthorizedHeader: React.FC = () => {
   );
 };
 
-const DesktopSubNav = ({ name }: any) => {
+const DesktopSubNav = ({ name, onOpen }: any) => {
   return (
     <Link
       href={"#"}
@@ -96,7 +96,7 @@ const DesktopSubNav = ({ name }: any) => {
     >
       <Stack direction={"row"} align={"center"}>
         <Box>
-          <Text>{name}</Text>
+          <Text onClick={onOpen}>{name}</Text>
         </Box>
         <Flex
           transition={"all .3s ease"}

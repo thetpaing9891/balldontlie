@@ -43,4 +43,4 @@ npm run build
 
 ## Demo Link
 
-[https://codigo-balldontlie.herokuapp.com/](https://codigo-balldontlie.herokuapp.com/)
+[https://main--transcendent-longma-1a6a01.netlify.app/](https://main--transcendent-longma-1a6a01.netlify.app/)

@@ -2,7 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { QueryClientProvider, QueryClient } from "react-query";
-
+import { Provider } from "react-redux";
+import store from "./redux/store";
 import { ThemeProvider } from "./theme";
 import { AppRoutes } from "./routes/index";
 
@@ -24,7 +25,9 @@ root.render(
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <ThemeProvider>
-          <AppRoutes />
+          <Provider store={store}>
+            <AppRoutes />
+          </Provider>
         </ThemeProvider>
       </BrowserRouter>
     </QueryClientProvider>
