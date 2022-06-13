@@ -15,6 +15,14 @@ export const deleteTeam = (team: TeamType) => {
   };
 };
 
+// Update Item from Store
+export const updateTeam = (team: TeamType) => {
+  return {
+    type: "UPDATE_TEAM",
+    payload: team,
+  };
+};
+
 export const clearCart = (team: TeamType[]) => {
   return {
     type: "CLEAR_TEAM",

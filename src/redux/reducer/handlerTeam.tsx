@@ -10,8 +10,15 @@ const handlerTeam = (state = team, action: any) => {
 
     case "DELETE_TEAM":
       // If not exists, remove
-      return state.map((item) => (item.id === action.payload.id ? [] : item));
-
+      return state.filter((item) => item.id !== action.payload.id);
+    case "UPDATE_TEAM":
+      // If not exists, update
+      return state.map((item) => {
+        if (item.id === action.payload.id) {
+          return { ...item, ...action.payload };
+        }
+        return item;
+      });
     case "CLEAR_TEAM":
       return (state = []);
     default:

@@ -13,7 +13,6 @@ import {
   Text,
   Flex,
 } from "@chakra-ui/react";
-import * as React from "react";
 import ProfileMenu from "./profile/index";
 import { useNavigate } from "react-router-dom";
 
