@@ -1,67 +1,90 @@
+import React from "react";
 import {
   Modal,
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalFooter,
-  ModalBody,
   ModalCloseButton,
-  Button,
-  FormControl,
+  ModalBody,
+  ModalFooter,
   FormLabel,
+  FormControl,
   Input,
+  Button,
   Text,
   useToast,
 } from "@chakra-ui/react";
-import { useDispatch, useSelector } from "react-redux";
-import { createTeam } from "../../redux/action";
 import { TeamType } from "../../types";
-import { v4 as uuidv4 } from "uuid";
 import useForm from "../../hooks/forms/useForm";
+import { useDispatch } from "react-redux";
+import { updateTeam } from "../../redux/action/index";
 
-const PopupForm = (props: any) => {
-  //Final submit function
-  const createForm = () => {
+interface EditPopupProps {
+  modalIsOpen: boolean;
+  modalOnClose: () => void;
+  selectedTeam: TeamType | undefined;
+  teams: TeamType[];
+  isUpdate: boolean | undefined;
+}
+
+const EditPopup = (props: EditPopupProps) => {
+  const toast = useToast();
+  const dispatch = useDispatch();
+
+  const initialRef = React.useRef(null) as any;
+  const finalRef = React.useRef(null) as any;
+
+  const handleUpdateSubmit = () => {
     const data: TeamType = {
-      id: uuidv4(),
+      id: values.id,
       name: values.name,
-      player_count: values.playerCount,
+      player_count: values.player_count,
       region: values.region,
       country: values.country,
     };
-    dispatch(createTeam(data));
-    props.onClose();
+    updateTeamById(data);
+    props.modalOnClose();
     toast({
-      title: `${values.name} has been created`,
+      title: `${values.name} has been updated`,
       status: "success",
       isClosable: true,
     });
   };
 
-  //Custom hook call
-
-  const toast = useToast();
-  const dispatch = useDispatch();
-  const teams: TeamType[] = useSelector((state: any) => state.handlerTeam);
+  const updateTeamById = (item: TeamType) => {
+    dispatch(updateTeam(item));
+  };
 
   const { handleChange, values, errors, handleSubmit } = useForm(
-    createForm,
-    teams,
-    false
+    handleUpdateSubmit,
+    props.teams,
+    props.isUpdate,
+    props.selectedTeam
   );
 
   return (
-    <Modal isOpen={props.isOpen} onClose={props.onClose}>
+    <Modal
+      initialFocusRef={initialRef}
+      finalFocusRef={finalRef}
+      isOpen={props.modalIsOpen}
+      onClose={props.modalOnClose}
+    >
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Create Team</ModalHeader>
+        <ModalHeader>Update Team</ModalHeader>
         <ModalCloseButton />
-        <ModalBody>
+        <ModalBody pb={6}>
           <FormControl mb={1}>
             <FormLabel htmlFor="name">
               Team name <span style={{ color: "red" }}>*</span>
             </FormLabel>
-            <Input id="name" type="name" name="name" onChange={handleChange} />
+            <Input
+              id="name"
+              type="name"
+              value={values?.name}
+              name="name"
+              onChange={handleChange}
+            />
             {errors.name && (
               <Text color={"red"} mt={1}>
                 {errors.name}
@@ -73,9 +96,10 @@ const PopupForm = (props: any) => {
               Player count <span style={{ color: "red" }}>*</span>
             </FormLabel>
             <Input
-              id="playerCount"
+              id="player_count"
               type="number"
-              name="playerCount"
+              value={values?.player_count}
+              name="player_count"
               onChange={handleChange}
             />
             {errors.playerCount && (
@@ -91,6 +115,7 @@ const PopupForm = (props: any) => {
             <Input
               id="region"
               type="region"
+              value={values?.region}
               name="region"
               onChange={handleChange}
             />
@@ -107,6 +132,7 @@ const PopupForm = (props: any) => {
             <Input
               id="country"
               type="country"
+              value={values?.country}
               name="country"
               onChange={handleChange}
             />
@@ -117,13 +143,15 @@ const PopupForm = (props: any) => {
             )}
           </FormControl>
         </ModalBody>
+
         <ModalFooter>
-          <Button type="submit" colorScheme="blue" onClick={handleSubmit}>
-            Submit
+          <Button colorScheme="blue" onClick={handleSubmit}>
+            Update
           </Button>
         </ModalFooter>
       </ModalContent>
     </Modal>
   );
 };
-export default PopupForm;
+
+export default EditPopup;
