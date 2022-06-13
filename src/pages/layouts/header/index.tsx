@@ -1,4 +1,3 @@
-import { ReactNode } from "react";
 import {
   Grid,
   HStack,
@@ -16,21 +15,6 @@ import {
 import ProfileMenu from "./profile/index";
 import { useNavigate } from "react-router-dom";
 
-const NavLink = ({ children }: { children: ReactNode }) => (
-  <Link
-    px={2}
-    py={1}
-    rounded={"md"}
-    _hover={{
-      textDecoration: "none",
-      bg: useColorModeValue("gray.200", "gray.700"),
-    }}
-    href={"#"}
-  >
-    {children}
-  </Link>
-);
-
 export const AuthorizedHeader = (props: any) => {
   const navigate = useNavigate();
   const linkHoverColor = useColorModeValue("gray.800", "white");
@@ -44,11 +28,28 @@ export const AuthorizedHeader = (props: any) => {
       p={8}
       justifyContent="space-between"
     >
-      <Image width="166px" height="60px" src="../../logo.svg" />
+      <Image
+        width="166px"
+        height="60px"
+        src="../../logo.svg"
+        onClick={() => navigate("/admin")}
+        cursor="pointer"
+      />
       <Grid placeItems="center" height="full" px="4" borderColor="gray.200">
         <Stack direction={"row"} spacing={4}>
           <HStack as={"nav"} spacing={4} display={{ base: "none", md: "flex" }}>
-            <NavLink>Players</NavLink>
+            <Link
+              px={2}
+              py={1}
+              rounded={"md"}
+              _hover={{
+                textDecoration: "none",
+                bg: useColorModeValue("gray.200", "gray.700"),
+              }}
+              onClick={() => navigate("/admin")}
+            >
+              Players
+            </Link>
             <Popover trigger={"hover"} placement={"bottom-start"}>
               <PopoverTrigger>
                 <Link
