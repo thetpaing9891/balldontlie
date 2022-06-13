@@ -15,6 +15,7 @@ import {
 } from "@chakra-ui/react";
 import * as React from "react";
 import ProfileMenu from "./profile/index";
+import { useNavigate } from "react-router-dom";
 
 const NavLink = ({ children }: { children: ReactNode }) => (
   <Link
@@ -32,6 +33,7 @@ const NavLink = ({ children }: { children: ReactNode }) => (
 );
 
 export const AuthorizedHeader = (props: any) => {
+  const navigate = useNavigate();
   const linkHoverColor = useColorModeValue("gray.800", "white");
   const popoverContentBgColor = useColorModeValue("white", "gray.800");
 
@@ -51,7 +53,7 @@ export const AuthorizedHeader = (props: any) => {
             <Popover trigger={"hover"} placement={"bottom-start"}>
               <PopoverTrigger>
                 <Link
-                  href="/admin/teams"
+                  onClick={() => navigate("/admin/teams")}
                   p={2}
                   fontWeight={500}
                   _hover={{
