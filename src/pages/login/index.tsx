@@ -92,6 +92,11 @@ const Login: React.FC = (): JSX.Element => {
           <FormLabel fontSize="lg">Username</FormLabel>
           <Input
             type="text"
+            border="2px solid"
+            borderColor="#DFE1E6"
+            borderRadius="base"
+            bg="inherit"
+            height="48px"
             pattern="[0-9]{6,6}"
             variant="aui"
             rounded="4px"
@@ -113,6 +118,11 @@ const Login: React.FC = (): JSX.Element => {
           <FormLabel fontSize="lg">Password</FormLabel>
           <VStack alignItems="flex-start" spacing="2">
             <PasswordInput
+              border="2px solid"
+              borderColor="#DFE1E6"
+              borderRadius="base"
+              bg="inherit"
+              height="48px"
               variant="aui"
               rounded="4px"
               isRequired
@@ -138,7 +148,8 @@ const Login: React.FC = (): JSX.Element => {
           size="lg"
           shadow="md"
           borderRadius="base"
-          colorScheme="brand"
+          bgColor={"#d5333e"}
+          color={"#fff"}
           onClick={handleSubmit}
         >
           Login
